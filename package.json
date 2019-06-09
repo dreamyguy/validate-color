@@ -1,0 +1,41 @@
+{
+  "name": "validate-color",
+  "version": "1.0.0",
+  "description": "Validate HTML colors by 'name', 'hex', 'rgb', 'rgba', 'hsl' or 'hsla' values",
+  "keywords": [
+    "validation",
+    "colors",
+    "validate color",
+    "color validation",
+    "HTML color validation",
+    "validate HTML color"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dreamyguy/validate-color"
+  },
+  "author": {
+    "name": "Wallace Sidhrée",
+    "email": "i@dreamyguy.com",
+    "url": "http://sidhree.com/"
+  },
+  "copyright": "Copyright (c) Wallace Sidhrée - All rights reserved.",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "webpack",
+    "test": "jest",
+    "test:watch": "jest --watch --verbose"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "babel-jest": "^24.8.0",
+    "jest": "^24.8.0",
+    "webpack": "^4.33.0",
+    "webpack-cli": "^3.3.2"
+  },
+  "engines": {
+    "node": ">=12.4.0"
+  }
+}

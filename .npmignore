@@ -1,0 +1,16 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# not needed on npm's distribution
+/tests
+babel.config.js
+webpack.config.js
+package-lock.json
+
+# dependencies
+/node_modules
+
+# misc
+.DS_Store
+
+# logs
+npm-debug.log*
