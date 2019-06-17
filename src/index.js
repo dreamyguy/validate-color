@@ -147,6 +147,7 @@ export const validateHTMLColorName = color => {
       'SlateGray',
       'DarkSlateGray',
       'Black',
+      'Transparent'
     ];
     htmlColorNames.map(c => {
       if (color.toLowerCase() === c.toLowerCase()) {
