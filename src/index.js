@@ -172,6 +172,18 @@ export const validateHTMLColor = color => {
   }
 };
 
+export const validateHTMLColorHex = color => {
+  // Only do any of this if 'color' is a string
+  if (typeof color === 'string') {
+    const regex = /^#([\da-f]{3}){1,2}$|^#([\da-f]{4}){1,2}$/i;
+    return (
+      color && regex.test(color)
+        ? true
+        : false
+    )
+  }
+};
+
 const validateColor = color => (
   color && (validateHTMLColorName(color) || validateHTMLColor(color))
     ? true

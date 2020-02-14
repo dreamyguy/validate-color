@@ -55,6 +55,28 @@ const ColorBox = props => {
 export default ColorBox;
 ```
 
+# Extend
+
+One can "extend" the library by using only parts of it.
+
+**1. Validate only HTML colors (`hex`, `rgb`, `rgba`, `hsl`, `hsla`), without `name`**
+
+```javascript
+import { validateHTMLColor } from 'validate-color';
+```
+
+**2. Validate only color `hex`**
+
+```javascript
+import { validateHTMLColorHex } from 'validate-color';
+```
+
+**3. Validate only color `name`**
+
+```javascript
+import { validateHTMLColorName } from 'validate-color';
+```
+
 # Development
 
 ## Getting started
