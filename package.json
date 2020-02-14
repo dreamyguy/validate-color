@@ -1,6 +1,6 @@
 {
   "name": "validate-color",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Validate HTML colors by 'name', 'hex', 'rgb', 'rgba', 'hsl' or 'hsla' values",
   "keywords": [
     "validation",
@@ -28,14 +28,11 @@
     "test:watch": "jest --watch --verbose"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.5",
-    "@babel/preset-env": "^7.4.5",
-    "babel-jest": "^24.8.0",
-    "jest": "^24.8.0",
-    "webpack": "^4.33.0",
-    "webpack-cli": "^3.3.2"
-  },
-  "engines": {
-    "node": ">=12.4.0"
+    "@babel/core": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
+    "babel-jest": "^25.1.0",
+    "jest": "^25.1.0",
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.11"
   }
 }
