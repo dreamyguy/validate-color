@@ -2,4 +2,6 @@ language: node_js
 cache:
   directories: node_modules
 node_js: 12
-script: yarn testTravis
+script:
+  npm install react react-dom
+  npm run testTravis
