@@ -140,15 +140,13 @@ This project wouldn't be complete without proper testing.
 
 [Jest][4] is my Unit Testing framework of choice. It's well documented and shares good practices & syntax with its most known predecessors (Mocha, Jasmine, etc). [Babel][5] was introduced as a dependency to the project because of Jest, but it was worth it since now we can use **ES6** syntax on our tests as well.
 
-Run all tests, once:
+Run all tests, in watch mode:
 
     npm run test
 
-Initialise the tests in watch mode:
+Tests are also run through [Travis][8] on every push to `master`. The build status is shown [at the top of this README](https://github.com/dreamyguy/validate-color#validate-color).
 
-    npm run test:watch
-
-> All tests reside under the [test/](https://github.com/dreamyguy/validate-color/blob/master/tests/) folder. There's only one test file at the moment: [index.test.js](https://github.com/dreamyguy/validate-color/blob/master/tests/index.test.js).
+> 👉 All tests are named according to the file they're testing: `index.js` -> _`index.test.js`_, and reside under the same directory. Since `Jest` comes as courtesy of [CRA][2], all tests should be placed under the [src/](https://github.com/dreamyguy/validate-color/blob/master/src/) folder.
 
 # Deploying
 
@@ -195,3 +193,4 @@ There are 3 commands one can run to deploy to these two places.
   [5]: https://babeljs.io/
   [6]: https://www.npmjs.com/package/validate-color
   [7]: https://dreamyguy.github.io/validate-color/
+  [8]: https://travis-ci.com/dreamyguy/validate-color
