@@ -2,7 +2,7 @@ import validateColor, {
   validateHTMLColorName,
   validateHTMLColorHex,
   validateHTMLColor,
-} from '../src/index';
+} from './index';
 
 describe('validateHTMLColorName', () => {
   describe('test invalid cases', () => {

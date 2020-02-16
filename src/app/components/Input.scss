@@ -1,0 +1,50 @@
+@import './../../styles/variables';
+
+.input {
+
+  box-sizing: border-box;
+  max-width: 300px;
+  margin: 0 auto 20px;
+
+  label,
+  &__label {
+    position: relative;
+    color: #222;
+    font-size: 13px;
+    p {
+      display: none;
+    }
+  }
+
+  &__field {
+    padding: 10px 35px;
+    font-size: 16px; // Avoid 'zoom' on iOS devices
+    width: 100%;
+    line-height: 1.2;
+    box-sizing: border-box;
+    color: #222;
+    &:focus {
+      outline: 2px solid #222;
+    }
+    border: 1px solid #222;
+    &.valid {
+      border: 1px solid green;
+    }
+  }
+
+  &__validation {
+    font-size: 40px;
+    &.show-message {
+      font-size: $font-size;
+      padding: 6px 17px 8px;
+      background-color: white;
+      border-radius: 20px;
+      .valid {
+        color: green;
+      }
+      .not-valid {
+        color: red;
+      }
+    }
+  }
+}

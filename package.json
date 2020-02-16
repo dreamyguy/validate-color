@@ -1,6 +1,7 @@
 {
   "name": "validate-color",
-  "version": "1.0.5",
+  "version": "1.0.6",
+  "private": false,
   "description": "Validate HTML colors by 'name', 'hex', 'rgb', 'rgba', 'hsl' or 'hsla' values",
   "keywords": [
     "validation",
@@ -10,10 +11,13 @@
     "HTML color validation",
     "validate HTML color"
   ],
+  "homepage": "https://dreamyguy.github.io/validate-color/",
   "repository": {
     "type": "git",
     "url": "https://github.com/dreamyguy/validate-color"
   },
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "author": {
     "name": "Wallace Sidhrée",
     "email": "i@dreamyguy.com",
@@ -21,18 +25,51 @@
   },
   "copyright": "Copyright (c) Wallace Sidhrée - All rights reserved.",
   "license": "MIT",
-  "main": "dist/index.js",
-  "scripts": {
-    "build": "webpack",
-    "test": "jest",
-    "test:watch": "jest --watch --verbose"
+  "peerDependencies": {
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
     "@babel/preset-env": "^7.8.4",
-    "babel-jest": "^25.1.0",
-    "jest": "^25.1.0",
+    "@babel/preset-react": "^7.8.3",
+    "babel-loader": "^8.0.6",
+    "fork-me-on-github": "^1.0.6",
+    "gh-pages": "^2.2.0",
+    "node-sass": "^4.13.1",
+    "react-emojis": "^1.0.6",
+    "react-scripts": "^3.4.0",
     "webpack": "^4.41.6",
     "webpack-cli": "^3.3.11"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "prebuild": "echo 🚀  Runnin 'build', hang tight!",
+    "build": "react-scripts build",
+    "postbuild": "echo 🎉 'build' was completed",
+    "prebuild-npm": "./bin/preBuildNpm.sh",
+    "build-npm": "NODE_ENV=npm webpack --config webpack.config.npm.js",
+    "postbuild-npm": "./bin/postBuildNpm.sh",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "deploy-npm": "npm publish",
+    "release": "npm run deploy && npm run deploy-npm"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

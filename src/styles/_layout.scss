@@ -1,0 +1,91 @@
+@import './variables';
+
+html,
+body,
+body > div,
+body .app,
+.validate-color {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  * {
+    box-sizing: border-box;
+  }
+  position: relative;
+}
+
+.header {
+  width: 100%;
+  &__content {
+    box-sizing: border-box;
+    padding: 20px;
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+    h1,
+    h2 {
+      margin: 15px 0;
+    }
+    h1 {
+      margin-top: 0;
+    }
+    h2 {
+      font-size: 18px;
+    }
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: $gutter-size/2 0;
+  display: flex;
+  justify-content: center;
+  font-size: 15px;
+  border-top: $border-layout;
+  background-color: white;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+// Avoid 'zoom' in iOS on the following elements
+input[type='text'],
+input[type='number'],
+select,
+select:focus,
+textarea {
+  font-size: $font-size; // Has to be at least 16px;
+}
+
+input[type=text],
+input[type=email],
+input[type=password],
+textarea {
+  // Remove inner shadow from form elements in iOS
+  -webkit-appearance: none;
+  // Remove rounded borders on iOS
+  border-radius: 0;
+}
+
+// Hide clear button on IE11 as we've implemented a global solution with SVG as background
+::-ms-clear {
+  display: none;
+}
+
+*:focus {
+  outline: 2px solid #e46119;
+}

@@ -1,7 +1,23 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# assets necessary for the application
+# but too large to be tracked, like .psd files
+/_assets
+
 # dependencies
 /node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+/lib
+
+# development mode
+.env.*
 
 # misc
 .DS_Store

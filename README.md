@@ -1,3 +1,5 @@
+![Validate Color](https://raw.githubusercontent.com/dreamyguy/validate-color/master/docs/validate-color-logo-github-full-width.png "Validate all possible HTML colors!")
+
 # Validate Color
 
 > ✅🌈🙌 Validate HTML colors by `name`, `hex`, `rgb`, `rgba`, `hsl` or `hsla` values
@@ -19,7 +21,26 @@ As I was writing [Console Log Plus](https://github.com/dreamyguy/console-log-plu
 - `hsl` - `hsl(100%, 100%, 100%)`
 - `hsla` - `hsla(100%, 100%, 100%, 1)`
 
+# Demo ✅ 🌈 🙌
+
+To demonstrate the power of _validate-color_, I decided it would be best to create a living github page, that would serve both as a way of showcase _validate-color_, and facilitate its use:
+
+[https://dreamyguy.github.io/validate-color/][7]
+
+On this page you can:
+
+- **Validate HTML colors as you type**
+
+_On my TODO list:_
+
+- _See opaque colors against black and white backgrounds._
+- _See colors with transparency in different contexts._
+
 # Usage
+
+**validate-color** is also [available as a package on `npm`][6] and can be installed as a depedency with:
+
+    npm i validate-color --save
 
 As with any node module, first you'll have to import it with `require`:
 
@@ -55,6 +76,8 @@ const ColorBox = props => {
 export default ColorBox;
 ```
 
+> 👉 The source for a full-fledged color validation component can be [viewed here](https://github.com/dreamyguy/validate-color/blob/master/src/app/App.js). That component can be [seen in action here][7].
+
 # Extend
 
 One can "extend" the library by using only parts of it.
@@ -85,13 +108,31 @@ Clone this repo locally. You'll need to have [NodeJS][1] installed. Install all 
 
     npm i
 
-## Building for production
+## Run it locally
 
-When you're done with your changes, run:
+To start the app locally, run:
+
+    npm run start
+
+This command fires up the application on port `9900`, making it visible on http://localhost:9900. Because this app is based on [create-react-app][2], the port number should be configured on the [.env](https://github.com/dreamyguy/validate-color/blob/master/.env#L1) file.
+
+## Building the frontend for Production
+
+When you're ready to build for production, run:
 
      npm run build
 
-This command compiles the production-optimised `javascript` to `dist/index.js`, a file compiled out of [src/index.js][3].
+This command compiles all production-optimised resources to a folder called **build**. It's meant to be run remotely, at the environment host, at build time.
+
+## Building for NPM
+
+When you're done with your changes, run:
+
+     npm run build-npm
+
+This command compiles the distribution-optimised `javascript` to `lib/index.js`, a file compiled out of [src/validate-color/index.js][3].
+
+> 👉 Note that the `lib/` folder and its contents are only available at the [NPM distribution][6].
 
 # Testing
 
@@ -109,6 +150,29 @@ Initialise the tests in watch mode:
 
 > All tests reside under the [test/](https://github.com/dreamyguy/validate-color/blob/master/tests/) folder. There's only one test file at the moment: [index.test.js](https://github.com/dreamyguy/validate-color/blob/master/tests/index.test.js).
 
+# Deploying
+
+This repo is a hybrid one. It:
+
+- Builds the NPM distribution
+- Builds the GitHub Page that serves as a demo/showcase
+
+There are 3 commands one can run to deploy to these two places.
+
+**Deploy to GitHub Pages**
+
+    npm run deploy
+
+**Deploy to NPM**
+
+    npm run deploy-npm
+
+**Deploy to both places at once**
+
+    npm run release
+
+> ⚠️ Make sure to bump version before releasing!
+
 ## Good to know
 
 ### License
@@ -124,9 +188,10 @@ Initialise the tests in watch mode:
 
 **Validate Color** was put together by [Wallace Sidhrée][1]. 👨‍💻🇳🇴
 
-
   [1]: http://sidhree.com/
-  [2]: https://nodejs.org/
-  [3]: https://github.com/dreamyguy/validate-color/blob/master/src/index.js
+  [2]: https://facebook.github.io/create-react-app/
+  [3]: https://github.com/dreamyguy/validate-color/blob/master/src/validate-color/index.js
   [4]: https://jestjs.io/
   [5]: https://babeljs.io/
+  [6]: https://www.npmjs.com/package/validate-color
+  [7]: https://dreamyguy.github.io/validate-color/
