@@ -51,6 +51,7 @@
     "build-npm": "NODE_ENV=npm webpack --config webpack.config.npm.js",
     "postbuild-npm": "./bin/postBuildNpm.sh",
     "test": "react-scripts test",
+    "testTravis": "CI=true react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
