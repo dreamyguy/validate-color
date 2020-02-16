@@ -36,6 +36,7 @@ class App extends Component {
     } = this.state;
     return (
       <div className={`input__validation${showMessage ? ' show-message' : ''}`}>
+        <span>&nbsp;</span>
         {isValid
           ?
             <span className="valid">
@@ -54,7 +55,7 @@ class App extends Component {
                     ?
                       `'${inputValue}' is not a valid color value!`
                     :
-                      <span>&nbsp;</span>
+                      null
                   }
                 </span>
               }
