@@ -93,6 +93,11 @@ describe('validateHTMLColor', () => {
       const validation = validateHTMLColor(color);
       expect(validation).toBe(false);
     })
+    it('validates "rgb(0, 0, 0)foo"', () => {
+      const color = 'rgb(0, 0, 0)foo';
+      const validation = validateHTMLColor(color);
+      expect(validation).toBe(false);
+    })
     it('validates "hsl(100%, 100%, 100%, 1009)"', () => {
       const color = 'hsl(100%, 100%, 100%, 1009)';
       const validation = validateHTMLColor(color);
@@ -110,6 +115,11 @@ describe('validateHTMLColor', () => {
     })
     it('validates "rgba(0,0,0, 1.2)"', () => {
       const color = 'rgba(0,0,0, 1.2)';
+      const validation = validateHTMLColor(color);
+      expect(validation).toBe(false);
+    })
+    it('validates "rgba(0, 0, 0,  1)foo"', () => {
+      const color = 'rgba(0, 0, 0,  1)foo';
       const validation = validateHTMLColor(color);
       expect(validation).toBe(false);
     })
@@ -138,8 +148,18 @@ describe('validateHTMLColor', () => {
       const validation = validateHTMLColor(color);
       expect(validation).toBe(false);
     })
+    it('validates "hsl(0, 0, 0)foo"', () => {
+      const color = 'hsl(0, 0, 0)foo';
+      const validation = validateHTMLColor(color);
+      expect(validation).toBe(false);
+    })
     it('validates "hsla(0,0,0, 1.2)"', () => {
       const color = 'hsla(0,0,0, 1.2)';
+      const validation = validateHTMLColor(color);
+      expect(validation).toBe(false);
+    })
+    it('validates "hsla(0, 0, 0,  1)foo"', () => {
+      const color = 'hsla(0, 0, 0,  1)foo';
       const validation = validateHTMLColor(color);
       expect(validation).toBe(false);
     })
