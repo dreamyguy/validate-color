@@ -1,6 +1,6 @@
 {
   "name": "validate-color",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "private": false,
   "description": "Validate HTML colors by 'name', 'hex', 'rgb', 'rgba', 'hsl' or 'hsla' values",
   "keywords": [
@@ -26,20 +26,20 @@
   "copyright": "Copyright (c) Wallace Sidhrée - All rights reserved.",
   "license": "MIT",
   "peerDependencies": {
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.4",
-    "@babel/preset-env": "^7.8.4",
-    "@babel/preset-react": "^7.8.3",
-    "babel-loader": "^8.0.6",
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "@babel/preset-react": "^7.9.4",
+    "babel-loader": "^8.1.0",
     "fork-me-on-github": "^1.0.6",
     "gh-pages": "^2.2.0",
     "node-sass": "^4.13.1",
     "react-emojis": "^1.0.6",
-    "react-scripts": "^3.4.0",
-    "webpack": "^4.41.6",
+    "react-scripts": "^3.4.1",
+    "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11"
   },
   "scripts": {
@@ -72,5 +72,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "dependencies": {}
 }
