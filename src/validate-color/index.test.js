@@ -240,6 +240,11 @@ describe('validateHTMLColor', () => {
       const validation = validateHTMLColor(color);
       expect(validation).toBe(true);
     })
+    it('validates "rgba(100,100,100,0)"', () => {
+      const color = 'rgba(100,100,100,0)';
+      const validation = validateHTMLColor(color);
+      expect(validation).toBe(true);
+    })
     it('validates "hsl(0, 0, 0)"', () => {
       const color = 'hsl(0, 0, 0)';
       const validation = validateHTMLColor(color);
