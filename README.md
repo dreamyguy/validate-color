@@ -16,10 +16,13 @@ As I was writing [Console Log Plus](https://github.com/dreamyguy/console-log-plu
 
 - `hex` - `#bada55`
 - `name` - `LightGoldenrodYellow`
-- `rgb` - `rgb(0, 0, 0)`
+- `special name` - `currentColor`
+- `rgb` - `rgb(0 0 0)`
 - `rgba` - `rgba(0, 0, 0, .45)`
-- `hsl` - `hsl(100%, 100%, 100%)`
-- `hsla` - `hsla(100%, 100%, 100%, 1)`
+- `hsl` - `hsl(4.71239rad, 60%, 70%)`
+- `hsla` - `hsla(180deg 100% 50% / .8)`
+
+Both `rgba` and `hsla` are now officially merged into their `rgb` and `hsl` counterparts, so the `a` can be omitted. The `a` is considered legacy syntax, so it will still work.
 
 # Demo ✅ 🌈 🙌
 
@@ -45,32 +48,29 @@ _On my TODO list:_
 As with any node module, first you'll have to import it with `require`:
 
 ```javascript
-var validateColor = require('validate-color');
+var validateColor = require("validate-color");
 ```
 
 ...or through `import`:
 
 ```javascript
-import validateColor from 'validate-color';
+import validateColor from "validate-color";
 ```
 
 Once you've done the import, you'll be able to do checks like (example in **React**):
 
 ```javascript
-import React from 'react';
-import validateColor from 'validate-color';
+import React from "react";
+import validateColor from "validate-color";
 
-const ColorBox = props => {
-  const {
-    color = '',
-    text = ''
-  } = props;
-  const theColor = color && validateColor(color) ? color : 'transparent';
+const ColorBox = (props) => {
+  const { color = "", text = "" } = props;
+  const theColor = color && validateColor(color) ? color : "transparent";
   return (
-    <div className="color-box" style={{backgroundColor: theColor}}>
+    <div className="color-box" style={{ backgroundColor: theColor }}>
       <p>{text}</p>
     </div>
-  )
+  );
 };
 
 export default ColorBox;
@@ -85,19 +85,37 @@ One can "extend" the library by using only parts of it.
 **1. Validate only HTML colors (`hex`, `rgb`, `rgba`, `hsl`, `hsla`), without `name`**
 
 ```javascript
-import { validateHTMLColor } from 'validate-color';
+import { validateHTMLColor } from "validate-color";
 ```
 
-**2. Validate only color `hex`**
+**2. Validate only `HEX` colors**
 
 ```javascript
-import { validateHTMLColorHex } from 'validate-color';
+import { validateHTMLColorHex } from "validate-color";
 ```
 
-**3. Validate only color `name`**
+**3. Validate only `HSL` colors**
 
 ```javascript
-import { validateHTMLColorName } from 'validate-color';
+import { validateHTMLColorHsl } from "validate-color";
+```
+
+**4. Validate only `NAME` colors**
+
+```javascript
+import { validateHTMLColorName } from "validate-color";
+```
+
+**5. Validate only `RGB` colors**
+
+```javascript
+import { validateHTMLColorRgb } from "validate-color";
+```
+
+**6. Validate only `SPECIAL NAME` colors**
+
+```javascript
+import { validateHTMLColorSpecialName } from "validate-color";
 ```
 
 # Development
@@ -186,11 +204,11 @@ There are 3 commands one can run to deploy to these two places.
 
 **Validate Color** was put together by [Wallace Sidhrée][1]. 👨‍💻🇳🇴
 
-  [1]: http://sidhree.com/
-  [2]: https://facebook.github.io/create-react-app/
-  [3]: https://github.com/dreamyguy/validate-color/blob/master/src/validate-color/index.js
-  [4]: https://jestjs.io/
-  [5]: https://babeljs.io/
-  [6]: https://www.npmjs.com/package/validate-color
-  [7]: https://dreamyguy.github.io/validate-color/
-  [8]: https://travis-ci.com/dreamyguy/validate-color
+[1]: http://sidhree.com/
+[2]: https://facebook.github.io/create-react-app/
+[3]: https://github.com/dreamyguy/validate-color/blob/master/src/validate-color/index.js
+[4]: https://jestjs.io/
+[5]: https://babeljs.io/
+[6]: https://www.npmjs.com/package/validate-color
+[7]: https://dreamyguy.github.io/validate-color/
+[8]: https://travis-ci.com/dreamyguy/validate-color
