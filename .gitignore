@@ -18,6 +18,7 @@
 
 # development mode
 .env.*
+README_*
 
 # misc
 .DS_Store

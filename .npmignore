@@ -24,8 +24,10 @@
 .babelrc
 .env
 .env.*
+.travis*
 /src
 TODO.md
+README_*
 webpack.config.*
 package-lock.json
 
