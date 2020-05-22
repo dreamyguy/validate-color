@@ -2,7 +2,7 @@
 
 # Validate Color
 
-> ✅🌈🙌 Validate HTML colors by `name`, `hex`, `rgb`, `rgba`, `hsl` or `hsla` values
+> ✅🌈🙌 Validate HTML colors by `name`, `special name`, `hex`, `rgb`, `rgba`, `hsl` or `hsla` values
 
 [![Build Status](https://travis-ci.com/dreamyguy/validate-color.svg?branch=master)](https://travis-ci.org/dreamyguy/validate-color) [![Node Version](https://img.shields.io/badge/node-v12.4.0-brightgreen.svg)](https://github.com/nodejs/node/releases/tag/v12.4.0)
 [![NPM Version](https://img.shields.io/badge/npm-v6.9.0-brightgreen.svg)](https://github.com/npm/cli/releases/tag/v6.9.0)
@@ -195,10 +195,12 @@ There are 3 commands one can run to deploy to these two places.
 
 [MIT](LICENSE)
 
-### Credits
+### Credits & Resources
 
-- The RegEx behind the HTML color validation came from https://www.regextester.com/103656
-- The color name list was extracted from https://htmlcolorcodes.com/color-names/
+- [Source from which the color name list was extracted from](https://htmlcolorcodes.com/color-names/)
+- [The Ultimate Guide to CSS Colors 2020 Edition](https://dev.to/alvaromontoro/the-ultimate-guide-to-css-colors-2020-edition-1bh1#hsl)
+- [MDN: CSS Colors](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value)
+- [MDN: Color Picker tool](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Colors/Color_picker_tool)
 
 ### About
 
