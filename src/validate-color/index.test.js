@@ -5,6 +5,7 @@ import validateColor, {
   validateHTMLColorName,
   validateHTMLColorRgb,
   validateHTMLColorSpecialName,
+  validateHTMLColorHwb,
 } from "./index";
 
 // -- Color HEX
@@ -231,6 +232,27 @@ const validateHTMLColorHslValidHsla = [
   "hsla(0, 0, 0,  .45)",
   "hsla(0, 0, 0,  .4)",
 ];
+// -- Color HWB
+const validateHTMLColorHwbInvalid = [
+  'hwb(180 0% 0% / 100)',
+  'hwb(180 0%0% / 100%)',
+  'hwb(180 0% 0%/100%)',
+  'hwb( 180 deg     0%   0%   /       100%   )',
+];
+const validateHTMLColorHwbValid = [
+  'hwb(180 60% 80%)',
+  'hwb(180 0 0)',
+  'hwb(180 0% 0%)',
+  'hwb(180 0% 0% / 1)',
+  'hwb(180 0% 0% / .1)',
+  'hwb(180 0% 0% / 0.1)',
+  'hwb(180 0% 0% / 1%)',
+  'hwb(180 0% 0% / 100%)',
+  'hwb( 180      0%   0%   /       100%   )',
+  'hwb(180deg 0% 0%)',
+  'hwb(180deg 0% 0% / 1)',
+  'hwb(180deg 0% 0% / 100%)',
+];
 // -- ALL colors, without 'name' or 'special name'
 const validateHTMLColorInvalid = [
   ...new Set([
@@ -240,6 +262,7 @@ const validateHTMLColorInvalid = [
     ...validateHTMLColorHexInvalid,
     ...validateHTMLColorRgbInvalid,
     ...validateHTMLColorHslInvalid,
+    ...validateHTMLColorHwbInvalid,
   ]),
 ];
 const validateHTMLColorValid = [
@@ -249,6 +272,7 @@ const validateHTMLColorValid = [
     ...validateHTMLColorRgbValidRgba,
     ...validateHTMLColorHslValidHsl,
     ...validateHTMLColorHslValidHsla,
+    ...validateHTMLColorHwbValid,
   ]),
 ];
 // -- ALL colors
@@ -258,6 +282,7 @@ const validateColorInvalid = [
     ...validateHTMLColorHexInvalid,
     ...validateHTMLColorRgbInvalid,
     ...validateHTMLColorHslInvalid,
+    ...validateHTMLColorHwbInvalid,
   ]),
 ];
 const validateColorValid = [
@@ -269,6 +294,7 @@ const validateColorValid = [
     ...validateHTMLColorRgbValidRgba,
     ...validateHTMLColorHslValidHsl,
     ...validateHTMLColorHslValidHsla,
+    ...validateHTMLColorHwbValid,
   ]),
 ];
 
@@ -370,6 +396,25 @@ describe("validateHTMLColorHsl", () => {
     validateHTMLColorHslValidHsla.map((c) =>
       it(`validates "${c}"`, () => {
         const validation = validateHTMLColorHsl(c);
+        expect(validation).toBe(true);
+      })
+    );
+  });
+});
+// -- Color HWB
+describe("validateHTMLColorHwb", () => {
+  describe("test invalid cases", () => {
+    validateHTMLColorHwbInvalid.map((c) =>
+      it(`invalidates "${c}"`, () => {
+        const validation = validateHTMLColorHwb(c);
+        expect(validation).toBe(false);
+      })
+    );
+  });
+  describe("test valid cases", () => {
+    validateHTMLColorHwbValid.map((c) =>
+      it(`validates "${c}"`, () => {
+        const validation = validateHTMLColorHwb(c);
         expect(validation).toBe(true);
       })
     );

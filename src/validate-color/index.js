@@ -222,12 +222,25 @@ export const validateHTMLColorHsl = (color) => {
   }
 };
 
+// Validate HTML color 'hwb'
+// -- 'hwb' accepts 'deg' as unit in its 1st property, which stands for 'hue'
+// 'deg': degrees | full circle = 360
+export const validateHTMLColorHwb = (color) => {
+  if (isString(color)) {
+    const degRegex = `(-?([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-9][0-9]|3[0-5][0-9]|360)(deg)?)`;
+    const regexLogic = `(hwb\\(\\s*?${degRegex}\\s+)((0|([0-9]|[1-9][0-9]|100)%)\\s+)((0|([0-9]|[1-9][0-9]|100)%)\\s*?\\)?)(\\s*?(\\/?)\\s+(((([0-9]|[1-9][0-9]|100)%))|(0?(\\.\\d+))|1))?\\s*?\\)$`;
+    const regex = new RegExp(regexLogic);
+    return color && regex.test(color);
+  }
+};
+
 // Validate only HTML colors (`hex`, `rgb`, `rgba`, `hsl`, `hsla`), without `name` og `special name`**
 export const validateHTMLColor = (color) => {
   if (
     (color && validateHTMLColorHex(color)) ||
     validateHTMLColorRgb(color) ||
-    validateHTMLColorHsl(color)
+    validateHTMLColorHsl(color) ||
+    validateHTMLColorHwb(color)
   ) {
     return true;
   }
@@ -246,7 +259,8 @@ const validateColor = (color) => {
     validateHTMLColorName(color) ||
     validateHTMLColorSpecialName(color) ||
     validateHTMLColorRgb(color) ||
-    validateHTMLColorHsl(color)
+    validateHTMLColorHsl(color) ||
+    validateHTMLColorHwb(color)
   ) {
     return true;
   }
