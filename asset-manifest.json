@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/validate-color/static/css/main.3d7263a9.chunk.css",
-    "main.js": "/validate-color/static/js/main.aa90f6dc.chunk.js",
-    "main.js.map": "/validate-color/static/js/main.aa90f6dc.chunk.js.map",
+    "main.js": "/validate-color/static/js/main.0291f52b.chunk.js",
+    "main.js.map": "/validate-color/static/js/main.0291f52b.chunk.js.map",
     "runtime-main.js": "/validate-color/static/js/runtime-main.9323e62b.js",
     "runtime-main.js.map": "/validate-color/static/js/runtime-main.9323e62b.js.map",
     "static/js/2.e7359aa6.chunk.js": "/validate-color/static/js/2.e7359aa6.chunk.js",
     "static/js/2.e7359aa6.chunk.js.map": "/validate-color/static/js/2.e7359aa6.chunk.js.map",
     "index.html": "/validate-color/index.html",
-    "precache-manifest.f115bc9f07ab2e7e2221e09025e74da0.js": "/validate-color/precache-manifest.f115bc9f07ab2e7e2221e09025e74da0.js",
+    "precache-manifest.59fdc42e9ac7c7316321f651fa040589.js": "/validate-color/precache-manifest.59fdc42e9ac7c7316321f651fa040589.js",
     "service-worker.js": "/validate-color/service-worker.js",
     "static/css/main.3d7263a9.chunk.css.map": "/validate-color/static/css/main.3d7263a9.chunk.css.map",
     "static/js/2.e7359aa6.chunk.js.LICENSE.txt": "/validate-color/static/js/2.e7359aa6.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.9323e62b.js",
     "static/js/2.e7359aa6.chunk.js",
     "static/css/main.3d7263a9.chunk.css",
-    "static/js/main.aa90f6dc.chunk.js"
+    "static/js/main.0291f52b.chunk.js"
   ]
 }
