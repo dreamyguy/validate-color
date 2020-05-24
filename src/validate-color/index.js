@@ -203,6 +203,13 @@ export const validateHTMLColorRgb = (color) => {
   }
 };
 
+const optionalCommaOrRequiredSpace = `((\\s*,\\s*)|(\\s+))`;
+const optionalDecimals = `(\\.\\d+)?`;
+const anyPercentage = `((\\d*${optionalDecimals})%)`;
+const hundredPercent = `(([0-9]|[1-9][0-9]|100)%)`;
+const alphaPercentage = `(((${hundredPercent}))|(0?${optionalDecimals})|1))?`;
+const endingWithAlphaPercentage = `\\s*?\\)?)(\\s*?(\\/?)\\s+${alphaPercentage}\\s*?\\)$`;
+
 // Validate HTML color 'hsl'
 // -- These units are valid for the first parameter
 // 'deg': degrees | full circle = 360
@@ -215,8 +222,8 @@ export const validateHTMLColorHsl = (color) => {
     const degRegex = `(-?([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-9][0-9]|3[0-5][0-9]|360)(deg)?)`;
     const graRegex = `(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-9][0-9]|3[0-9][0-9]|400)gra)`;
     const radRegex = `((([0-5])?\\.\\d+|6\\.([0-9]|1[0-9]|2[0-8])|[0-6])rad)`;
-    const turnRegex = `((0?(\\.\\d+)|1)turn)`;
-    const regexLogic = `(hsl)a?\\((\\s*?(${degRegex}|${graRegex}|${radRegex}|${turnRegex})\\s*?,?\\s*?)(\\s*?(0|([1-9]|[1-9][0-9]|100)%)\\s*?,?\\s*?)(\\s*?(0|([1-9]|[1-9][0-9]|100)%)\\s*?\\)?)(\\s*?(\\/?|,?)\\s*?(((([0-9]|[1-9][0-9]|100)%))|(0?(\\.\\d+))|1))?\\)$`;
+    const turnRegex = `((0?${optionalDecimals}|1)turn)`;
+    const regexLogic = `(hsl)a?\\((\\s*?(${degRegex}|${graRegex}|${radRegex}|${turnRegex})${optionalCommaOrRequiredSpace})(\\s*?(0|${hundredPercent})${optionalCommaOrRequiredSpace})(\\s*?(0|${hundredPercent})\\s*?\\)?)(\\s*?(\\/?|,?)\\s*?(((${hundredPercent}))|(0?${optionalDecimals})|1))?\\)$`;
     const regex = new RegExp(regexLogic);
     return color && regex.test(color);
   }
@@ -228,19 +235,31 @@ export const validateHTMLColorHsl = (color) => {
 export const validateHTMLColorHwb = (color) => {
   if (isString(color)) {
     const degRegex = `(-?([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-9][0-9]|3[0-5][0-9]|360)(deg)?)`;
-    const regexLogic = `(hwb\\(\\s*?${degRegex}\\s+)((0|([0-9]|[1-9][0-9]|100)%)\\s+)((0|([0-9]|[1-9][0-9]|100)%)\\s*?\\)?)(\\s*?(\\/?)\\s+(((([0-9]|[1-9][0-9]|100)%))|(0?(\\.\\d+))|1))?\\s*?\\)$`;
+    const regexLogic = `(hwb\\(\\s*?${degRegex}\\s+)((0|${hundredPercent})\\s+)((0|${hundredPercent})${endingWithAlphaPercentage}`;
     const regex = new RegExp(regexLogic);
     return color && regex.test(color);
   }
 };
 
-// Validate only HTML colors (`hex`, `rgb`, `rgba`, `hsl`, `hsla`), without `name` og `special name`**
+// Validate HTML color 'lab'
+// -- 'lab' 2nd & 3rd parameters are any number between -160 & 160
+export const validateHTMLColorLab = (color) => {
+  if (isString(color)) {
+    const labParam = `(-?(([0-9]|[1-9][0-9]|1[0-5][0-9])${optionalDecimals}?|160))`;
+    const regexLogic = `(lab\\(\\s*?${anyPercentage}\\s+${labParam}\\s+${labParam}${endingWithAlphaPercentage}`;
+    const regex = new RegExp(regexLogic);
+    return color && regex.test(color);
+  }
+};
+
+// Validate only HTML colors (`hex`, `rgb`, `rgba`, `hsl`, `hsla`, `hwb`, `lab`), without `name` og `special name`**
 export const validateHTMLColor = (color) => {
   if (
     (color && validateHTMLColorHex(color)) ||
     validateHTMLColorRgb(color) ||
     validateHTMLColorHsl(color) ||
-    validateHTMLColorHwb(color)
+    validateHTMLColorHwb(color) ||
+    validateHTMLColorLab(color)
   ) {
     return true;
   }
@@ -260,7 +279,8 @@ const validateColor = (color) => {
     validateHTMLColorSpecialName(color) ||
     validateHTMLColorRgb(color) ||
     validateHTMLColorHsl(color) ||
-    validateHTMLColorHwb(color)
+    validateHTMLColorHwb(color) ||
+    validateHTMLColorLab(color)
   ) {
     return true;
   }

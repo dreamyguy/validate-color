@@ -81,7 +81,7 @@ class App extends Component {
           <div className="header">
             <div className="header__content">
               <h1><Emoji emoji="check-mark-button"/>&nbsp;&nbsp;validate-color&nbsp;&nbsp;<Emoji emoji="rainbow"/></h1>
-              <h2>Validate HTML colors by 'name', 'special name', 'hex', 'rgb', 'rgba', 'hsl' or 'hsla' values</h2>
+              <h2>Validate HTML colors by 'name', 'special name', 'hex', 'rgb', 'rgba', 'hsl', 'hsla', 'hwb' or 'lab' values</h2>
             </div>
           </div>
           <div className="validate-color" style={{backgroundColor: validateColor(inputValue) ? inputValue : 'transparent'}}>

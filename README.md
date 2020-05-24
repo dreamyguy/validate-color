@@ -2,7 +2,7 @@
 
 # Validate Color
 
-> ✅🌈🙌 Validate HTML colors by `name`, `special name`, `hex`, `rgb`, `rgba`, `hsl` or `hsla` values
+> ✅🌈🙌 Validate HTML colors by `name`, `special name`, `hex`, `rgb`, `rgba`, `hsl`, `hsla`, `hwb` or `lab` values
 
 [![Build Status](https://travis-ci.com/dreamyguy/validate-color.svg?branch=master)](https://travis-ci.org/dreamyguy/validate-color) [![Node Version](https://img.shields.io/badge/node-v12.4.0-brightgreen.svg)](https://github.com/nodejs/node/releases/tag/v12.4.0)
 [![NPM Version](https://img.shields.io/badge/npm-v6.9.0-brightgreen.svg)](https://github.com/npm/cli/releases/tag/v6.9.0)
@@ -21,6 +21,8 @@ As I was writing [Console Log Plus](https://github.com/dreamyguy/console-log-plu
 - `rgba` - `rgba(0, 0, 0, .45)`
 - `hsl` - `hsl(4.71239rad, 60%, 70%)`
 - `hsla` - `hsla(180deg 100% 50% / .8)`
+- `hwb` - `hwb(180deg 0% 0% / 100%)`
+- `lab` - `lab(2000.1337% -8.6911 -159.131231 / .987189732)`
 
 Both `rgba` and `hsla` are now officially merged into their `rgb` and `hsl` counterparts, so the `a` can be omitted. The `a` is considered legacy syntax, so it will still work.
 
@@ -82,7 +84,7 @@ export default ColorBox;
 
 One can "extend" the library by using only parts of it.
 
-**1. Validate only HTML colors (`hex`, `rgb`, `rgba`, `hsl`, `hsla`), without `name`**
+**1. Validate only HTML colors (`hex`, `rgb`, `rgba`, `hsl`, `hsla`, `hwb`, `lab`), without `name`**
 
 ```javascript
 import { validateHTMLColor } from "validate-color";
@@ -117,6 +119,20 @@ import { validateHTMLColorRgb } from "validate-color";
 ```javascript
 import { validateHTMLColorSpecialName } from "validate-color";
 ```
+
+**7. Validate only `HWB` colors**
+
+```javascript
+import { validateHTMLColorHwb } from "validate-color";
+```
+
+**8. Validate only `LAB` colors**
+
+```javascript
+import { validateHTMLColorLab } from "validate-color";
+```
+
+> 👉 I was proactive and added validation to these relatively new HTML/CSS colors (**HWB** & **LAB**), but since [they're still drafts at the time of this writing][9], they might still be not fully supported at the time of this reading.
 
 # Development
 
@@ -201,6 +217,7 @@ There are 3 commands one can run to deploy to these two places.
 - [The Ultimate Guide to CSS Colors 2020 Edition](https://dev.to/alvaromontoro/the-ultimate-guide-to-css-colors-2020-edition-1bh1#hsl)
 - [MDN: CSS Colors](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value)
 - [MDN: Color Picker tool](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Colors/Color_picker_tool)
+- [CSS Color Module Level 4 Editor's Draft][9]
 
 ### About
 
@@ -214,3 +231,4 @@ There are 3 commands one can run to deploy to these two places.
 [6]: https://www.npmjs.com/package/validate-color
 [7]: https://dreamyguy.github.io/validate-color/
 [8]: https://travis-ci.com/dreamyguy/validate-color
+[9]: https://drafts.csswg.org/css-color/

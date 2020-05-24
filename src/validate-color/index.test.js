@@ -6,6 +6,7 @@ import validateColor, {
   validateHTMLColorRgb,
   validateHTMLColorSpecialName,
   validateHTMLColorHwb,
+  validateHTMLColorLab,
 } from "./index";
 
 // -- Color HEX
@@ -141,12 +142,16 @@ const validateHTMLColorHslInvalid = [
   "hsl(0, 0, 0)foo",
   "hsl(0,0,0,1.2)",
   "hsl(1, 60%, 70)",
-  "hsl(100%, 100%, 100%)",
   "hsl(100%, 100%, 100%, 1009)",
-  "hsl(12, 12%, 120)", // as pointed out by @slashwhatever
+  "hsl(180deg100%50%)",
+  "hsl(100%100%100%)",
+  "hsl(100%, 100%, 100%)",
+  "hsl(100%, 0, 0)",
+  "hsl(100% 0 0)",
   "hsla(0, 0, 0,  1)foo",
   "hsla(0,0,0, 1.2)",
   "hsla(100%, 100%, 100%, 1)",
+  "hsl(12, 12%, 120)", // as pointed out by @slashwhatever
   // odd units
   "hsl(361deg, 60%, 70%)",
   "hsl(401gra, 60%, 70%)",
@@ -168,11 +173,11 @@ const validateHTMLColorHslValidHsl = [
   "hsl(180 100% 50% / 100%)",
   "hsl(180 100% 50% / 100%)",
   "hsl(180deg 100% 50%)",
-  "hsl(180deg 100% 50%)",
   "hsl(180deg 100% 50% / 1)",
   "hsl(180deg 100% 50% / 0.8)",
   "hsl(180deg 100% 50% / .8)",
   "hsl(180deg 100% 50% / 100%)",
+  "hsl(0 0 0)",
   // former tests
   "hsl(0, 0, 0)",
   "hsl(  0, 0, 0 )",
@@ -253,6 +258,29 @@ const validateHTMLColorHwbValid = [
   'hwb(180deg 0% 0% / 1)',
   'hwb(180deg 0% 0% / 100%)',
 ];
+// -- Color LAB
+const validateHTMLColorLabInvalid = [
+  'lab(67.5345%, 0, 0)',
+  'lab(67.5345% -10 -161)',
+  'lab(67.5345% -10 -161 / 1)',
+  'lab(67.5345% -10 -161 / 100%)',
+  'lab(67.5345% -10 -160 / 101%)',
+];
+const validateHTMLColorLabValid = [
+  'lab(67.5345% -8.6911 -41.6019)',
+  'lab(67.5345% -8.6911 -41.6019 / 1)',
+  'lab(67.5345% -8.6911 -41.6019 / 100%)',
+  'lab(67.5345% 13 160)',
+  'lab(67.5345% 0 0)',
+  'lab(0.5345% 0 0)',
+  'lab(0% 0 0)',
+  'lab(67.5345% -8.6911 -159.131231)',
+  'lab(67.5345% -8.6911 -159.131231 / .987189732)',
+  'lab(1337% 0 0)',
+  'lab(2000% 0 0)',
+  'lab(1337% -8.6911 -41.6019 / 100%)',
+  'lab(2000.1337% -8.6911 -41.6019 / 100%)',
+];
 // -- ALL colors, without 'name' or 'special name'
 const validateHTMLColorInvalid = [
   ...new Set([
@@ -263,6 +291,7 @@ const validateHTMLColorInvalid = [
     ...validateHTMLColorRgbInvalid,
     ...validateHTMLColorHslInvalid,
     ...validateHTMLColorHwbInvalid,
+    ...validateHTMLColorLabInvalid,
   ]),
 ];
 const validateHTMLColorValid = [
@@ -273,6 +302,7 @@ const validateHTMLColorValid = [
     ...validateHTMLColorHslValidHsl,
     ...validateHTMLColorHslValidHsla,
     ...validateHTMLColorHwbValid,
+    ...validateHTMLColorLabValid,
   ]),
 ];
 // -- ALL colors
@@ -283,6 +313,7 @@ const validateColorInvalid = [
     ...validateHTMLColorRgbInvalid,
     ...validateHTMLColorHslInvalid,
     ...validateHTMLColorHwbInvalid,
+    ...validateHTMLColorLabInvalid,
   ]),
 ];
 const validateColorValid = [
@@ -295,6 +326,7 @@ const validateColorValid = [
     ...validateHTMLColorHslValidHsl,
     ...validateHTMLColorHslValidHsla,
     ...validateHTMLColorHwbValid,
+    ...validateHTMLColorLabValid,
   ]),
 ];
 
@@ -415,6 +447,25 @@ describe("validateHTMLColorHwb", () => {
     validateHTMLColorHwbValid.map((c) =>
       it(`validates "${c}"`, () => {
         const validation = validateHTMLColorHwb(c);
+        expect(validation).toBe(true);
+      })
+    );
+  });
+});
+// -- Color LAB
+describe("validateHTMLColorLab", () => {
+  describe("test invalid cases", () => {
+    validateHTMLColorLabInvalid.map((c) =>
+      it(`invalidates "${c}"`, () => {
+        const validation = validateHTMLColorLab(c);
+        expect(validation).toBe(false);
+      })
+    );
+  });
+  describe("test valid cases", () => {
+    validateHTMLColorLabValid.map((c) =>
+      it(`validates "${c}"`, () => {
+        const validation = validateHTMLColorLab(c);
         expect(validation).toBe(true);
       })
     );
