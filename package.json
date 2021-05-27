@@ -25,10 +25,6 @@
   },
   "copyright": "Copyright (c) Wallace Sidhrée - All rights reserved.",
   "license": "MIT",
-  "peerDependencies": {
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1"
-  },
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@babel/preset-env": "^7.12.7",
@@ -40,7 +36,9 @@
     "react-emojis": "^1.0.6",
     "react-scripts": "^4.0.1",
     "webpack": "4.44.2",
-    "webpack-cli": "^4.2.0"
+    "webpack-cli": "^4.2.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
