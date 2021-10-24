@@ -50,7 +50,7 @@ _On my TODO list:_
 As with any node module, first you'll have to import it with `require`:
 
 ```javascript
-var validateColor = require("validate-color");
+var validateColor = require("validate-color").default;
 ```
 
 ...or through `import`:
