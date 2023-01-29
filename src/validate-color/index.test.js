@@ -7,6 +7,7 @@ import validateColor, {
   validateHTMLColorSpecialName,
   validateHTMLColorHwb,
   validateHTMLColorLab,
+  validateHTMLColorLch,
 } from "./index";
 
 // -- Color HEX
@@ -281,6 +282,44 @@ const validateHTMLColorLabValid = [
   'lab(1337% -8.6911 -41.6019 / 100%)',
   'lab(2000.1337% -8.6911 -41.6019 / 100%)',
 ];
+// -- Color LCH
+const validateHTMLColorLchInvalid = [
+  'lch(180 0% 0% / 100)',
+  'lch(180 0%0% / 100%)',
+  'lch(180 0% 0%/100%)',
+  'lch( 180 deg     0%   0%   /       100%   )',
+  'lch(48% 81 360.00001deg)', // Too many degrees
+  'lch(48% 81 361deg)', // Too many degrees
+  'lch(48% 81 361)', // Too many degrees
+  'lch(1 1 360deg / 1.001)', // Too much alpha
+];
+const validateHTMLColorLchValid = [
+  'lch(29.2345% 44.2 27)', // mdn web docs
+  'lch(52.2345% 72.2 56.2)', // mdn web docs
+  'lch(52.2345% 72.2 56.2 / .5)', // mdn web docs
+  'lch(29.2345 44.2 27)',
+  'lch(52.2345 72.2 56.2)',
+  'lch(52.2345 72.2 56.2 / .5)',
+  'lch(29.2345 44.2 27deg)',
+  'lch(52.2345 72.2 56.2deg)',
+  'lch(52.2345 72.2 56.2deg / .5)',
+  'lch(50% 50 50)',
+  'lch(54.292% 106.839 40.853)', // lea verou
+  'lch(48% 81 350)', // lea verou
+  'lch(54.292 106.839 40.853deg)',
+  'lch(48 81 350deg)',
+  'lch(1 1 360deg / .9998)',
+  'lch(1 1 360deg / 1)',
+  'lch(1 1 1deg / 1)',
+  'lch(1 1 1 / 1)',
+  'lch(0 0 0 / 0)',
+  'lch(0.1 0.1 0.1 / 0.1)',
+  'lch(0.1 0.1 0.1 / .1)',
+  'lch(0.1 0.1 .1 / .1)',
+  'lch(0.1 .1 .1 / .1)',
+  'lch(.1 .1 .1 / .1)',
+  'lch(.0 .0 .0 / .0)',
+];
 // -- ALL colors, without 'name' or 'special name'
 const validateHTMLColorInvalid = [
   ...new Set([
@@ -292,6 +331,7 @@ const validateHTMLColorInvalid = [
     ...validateHTMLColorHslInvalid,
     ...validateHTMLColorHwbInvalid,
     ...validateHTMLColorLabInvalid,
+    ...validateHTMLColorLchInvalid,
   ]),
 ];
 const validateHTMLColorValid = [
@@ -303,6 +343,7 @@ const validateHTMLColorValid = [
     ...validateHTMLColorHslValidHsla,
     ...validateHTMLColorHwbValid,
     ...validateHTMLColorLabValid,
+    ...validateHTMLColorLchValid,
   ]),
 ];
 // -- ALL colors
@@ -314,6 +355,7 @@ const validateColorInvalid = [
     ...validateHTMLColorHslInvalid,
     ...validateHTMLColorHwbInvalid,
     ...validateHTMLColorLabInvalid,
+    ...validateHTMLColorLchInvalid,
   ]),
 ];
 const validateColorValid = [
@@ -327,6 +369,7 @@ const validateColorValid = [
     ...validateHTMLColorHslValidHsla,
     ...validateHTMLColorHwbValid,
     ...validateHTMLColorLabValid,
+    ...validateHTMLColorLchValid,
   ]),
 ];
 
@@ -466,6 +509,25 @@ describe("validateHTMLColorLab", () => {
     validateHTMLColorLabValid.map((c) =>
       it(`validates "${c}"`, () => {
         const validation = validateHTMLColorLab(c);
+        expect(validation).toBe(true);
+      })
+    );
+  });
+});
+// -- Color LCH
+describe("validateHTMLColorLch", () => {
+  describe("test invalid cases", () => {
+    validateHTMLColorLchInvalid.map((c) =>
+      it(`invalidates "${c}"`, () => {
+        const validation = validateHTMLColorLch(c);
+        expect(validation).toBe(false);
+      })
+    );
+  });
+  describe("test valid cases", () => {
+    validateHTMLColorLchValid.map((c) =>
+      it(`validates "${c}"`, () => {
+        const validation = validateHTMLColorLch(c);
         expect(validation).toBe(true);
       })
     );
