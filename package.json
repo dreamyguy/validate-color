@@ -1,15 +1,31 @@
 {
   "name": "validate-color",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "private": false,
   "description": "Validate HTML colors by 'name', 'special name', 'hex', 'rgb', 'rgba', 'hsl', 'hsla', 'hwb', 'lab' or 'lch' values",
   "keywords": [
     "validation",
+    "color",
     "colors",
+    "colour",
+    "colours",
     "validate color",
+    "validate colour",
     "color validation",
+    "colour validation",
     "HTML color validation",
-    "validate HTML color"
+    "HTML colour validation",
+    "validate HTML color",
+    "validate HTML colour",
+    "hex",
+    "rgb",
+    "rgba",
+    "hsl",
+    "hsla",
+    "hwb",
+    "lab",
+    "lch",
+    "css"
   ],
   "homepage": "https://dreamyguy.github.io/validate-color/",
   "repository": {

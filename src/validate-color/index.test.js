@@ -334,6 +334,11 @@ const validateHTMLColorLchValid = [
   'lch(.1 .1 .1 / .1)',
   'lch(.0 .0 .0 / .0)',
 ];
+// -- Color - Would be valid if we were not limiting greedy (+) spaces and digits by 9
+const validateHTMLColorReDoSInvalid = [
+  'lab(67.5345% -8.6911 -159.131231 / .9871897322)',
+  'hsl(0,                   0  , 0                          )',
+]
 // -- ALL colors, without 'name' or 'special name'
 const validateHTMLColorInvalid = [
   ...new Set([
@@ -346,6 +351,7 @@ const validateHTMLColorInvalid = [
     ...validateHTMLColorHwbInvalid,
     ...validateHTMLColorLabInvalid,
     ...validateHTMLColorLchInvalid,
+    ...validateHTMLColorReDoSInvalid,
   ]),
 ];
 const validateHTMLColorValid = [
@@ -370,6 +376,7 @@ const validateColorInvalid = [
     ...validateHTMLColorHwbInvalid,
     ...validateHTMLColorLabInvalid,
     ...validateHTMLColorLchInvalid,
+    ...validateHTMLColorReDoSInvalid,
   ]),
 ];
 const validateColorValid = [

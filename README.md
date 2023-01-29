@@ -141,6 +141,22 @@ import { validateHTMLColorLch } from "validate-color";
 
 > 👉 I was proactive and added validation to these relatively new HTML/CSS colors (**HWB** & **LAB** & **LCH**), but since [they're still drafts at the time of this writing][9], they might still be not fully supported at the time of this reading.
 
+# Preventing ReDoS (`regex` denial-of-service) attacks
+
+A ReDoS vulnerability [was reported as an issue](https://github.com/dreamyguy/validate-color/issues/28) on Oct 14, 2022, but that went under my radar. It was just today (Jan 29, 2023) I came across the issue, and luckily I had time to look into it.
+
+This vulnerability was officially reported as **`CVE-2021-40892`**, and is listed a few places: [1](https://nvd.nist.gov/vuln/detail/CVE-2021-40892), [2](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-40892), [3](https://security.snyk.io/vuln/SNYK-JS-VALIDATECOLOR-2935878), [4](https://cve.report/CVE-2021-40892), [5](https://feedly.com/cve/CVE-2021-40892).
+
+A similar problem was reported for the [`color-string` package](https://security.snyk.io/vuln/SNYK-JS-COLORSTRING-1082939), versions < 1.5.5.
+
+A good article by Godson Obielum: [How to protect against regex denial-of-service (ReDoS) attacks](https://blog.logrocket.com/protect-against-regex-denial-of-service-redos-attacks/).
+
+The issue is caused by the "greedy" character in `regex`, the infamous `+`. I've made amendments that limit the number of both spaces and digits by `9`, instead of having no limits.
+
+**That will, from this point onwards, invalidate otherwise valid colors that cross that threshold.**
+
+Since this is an important update, I'm releasing it as a patch ([`v2.2.3`](https://github.com/dreamyguy/validate-color/releases/tag/v2.2.3))
+
 # Development
 
 ## Getting started

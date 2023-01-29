@@ -195,10 +195,10 @@ export const validateHTMLColorHex = (color) => {
   }
 };
 
-const spaceNoneOrMore = `(\\s*)`;
-const spaceOneOrMore = `(\\s+)`;
-const digitNoneOrMore = `(\\d*)`;
-const digitOneOrMore = `(\\d+)`;
+const spaceNoneOrMore = `(\\s{0,9})`;
+const spaceOneOrMore = `(\\s{1,9})`;
+const digitNoneOrMore = `(\\d{0,9})`;
+const digitOneOrMore = `(\\d{1,9})`;
 const optionalCommaOrRequiredSpace = `((${spaceNoneOrMore},${spaceNoneOrMore})|(${spaceOneOrMore}))`;
 const optionalDecimals = `((\\.${digitOneOrMore})?)`;
 const anyNumber = `(${digitNoneOrMore}${optionalDecimals})`;
