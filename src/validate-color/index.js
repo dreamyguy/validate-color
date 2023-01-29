@@ -195,21 +195,6 @@ export const validateHTMLColorHex = (color) => {
   }
 };
 
-// * Validate HTML color 'rgb'
-// -- legacy notation
-// color: rgb(255, 255, 255);
-// color: rgba(255, 255, 255, 1);
-// -- new notation
-// color: rgb(255 255 255);
-// color: rgb(255 255 255 / 1);
-// Note that 'rgba()' is now merged into 'rgb()'
-export const validateHTMLColorRgb = (color) => {
-  if (isString(color)) {
-    const regex = /(rgb)a?\((\s*\d+%?\s*?,?\s*){2}(\s*\d+%?\s*?,?\s*\)?)(\s*,?\s*\/?\s*(0?\.?\d+%?\s*)?|1|0)?\)$/i;
-    return color && regex.test(color);
-  }
-};
-
 const spaceNoneOrMore = `(\\s*)`;
 const spaceOneOrMore = `(\\s+)`;
 const digitNoneOrMore = `(\\d*)`;
@@ -226,6 +211,28 @@ const alphaPercentage = `(((${hundredPercent}))|(0?${optionalDecimals})|1))?`;
 const alphaPercentageRequired = `(${hundredPercent}|(0?${optionalDecimals})|1)`;
 const endingWithAlphaPercentage = `${spaceNoneOrMore}?\\)?)(${spaceNoneOrMore}?(\\/?)${spaceOneOrMore}${alphaPercentage}${spaceNoneOrMore}?\\)$`;
 const degRegex = `(-?${anyNumberWithinThreeHundredSixty}(deg)?)`;
+
+// * Validate HTML color 'rgb'
+// -- legacy notation
+// color: rgb(255, 255, 255);
+// color: rgba(255, 255, 255, 1);
+// -- new notation
+// color: rgb(255 255 255);
+// color: rgb(255 255 255 / 1);
+// Note that 'rgba()' is now merged into 'rgb()'
+export const validateHTMLColorRgb = (color) => {
+  if (isString(color)) {
+    const letter = `${spaceNoneOrMore}${digitOneOrMore}%?${spaceNoneOrMore},?${spaceNoneOrMore}`
+    const gap = `((${spaceNoneOrMore},?${spaceNoneOrMore})|(${spaceOneOrMore}))`
+    const R = `${letter}${gap}`;
+    const G = `${letter}${gap}`;
+    const B = `${letter}${gap}`;
+    const A = `(${gap}\\/?${spaceNoneOrMore}(0?\\.?${digitOneOrMore}%?${spaceNoneOrMore})?|1|0)`;
+    const regexLogic = `(rgb)a?\\(${R}${G}${B}\\)?(${A})?\\)$`
+    const regex = new RegExp(regexLogic);
+    return color && regex.test(color);
+  }
+};
 
 // * Validate HTML color 'hsl'
 // -- These units are valid for the first parameter
