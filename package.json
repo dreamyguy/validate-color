@@ -1,6 +1,6 @@
 {
   "name": "validate-color",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "private": false,
   "description": "Validate HTML colors by 'name', 'special name', 'hex', 'rgb', 'rgba', 'hsl', 'hsla', 'hwb', 'lab' or 'lch' values",
   "keywords": [
