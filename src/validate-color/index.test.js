@@ -71,6 +71,20 @@ const validateHTMLColorNameValid = [
   "Cornsilk",
   "red",
   "skyblue",
+  "DarkGray",
+  "DarkGrey",
+  "DarkSlateGray",
+  "DarkSlateGrey",
+  "DimGray",
+  "DimGrey",
+  "Gray",
+  "Grey",
+  "LightGray",
+  "LightGrey",
+  "LightSlateGray",
+  "LightSlateGrey",
+  "SlateGray",
+  "SlateGrey",
 ];
 // -- Color special name
 const validateHTMLColorSpecialNameValid = [
