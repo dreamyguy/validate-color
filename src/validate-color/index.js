@@ -210,9 +210,13 @@ export const validateHTMLColorRgb = (color) => {
   }
 };
 
-const optionalCommaOrRequiredSpace = `((\\s*,\\s*)|(\\s+))`;
-const optionalDecimals = `((\\.\\d+)?)`;
-const anyNumber = `(\\d*${optionalDecimals})`;
+const spaceNoneOrMore = `(\\s*)`;
+const spaceOneOrMore = `(\\s+)`;
+const digitNoneOrMore = `(\\d*)`;
+const digitOneOrMore = `(\\d+)`;
+const optionalCommaOrRequiredSpace = `((${spaceNoneOrMore},${spaceNoneOrMore})|(${spaceOneOrMore}))`;
+const optionalDecimals = `((\\.${digitOneOrMore})?)`;
+const anyNumber = `(${digitNoneOrMore}${optionalDecimals})`;
 const anyNumberWithinHundred = `(([0-9]|[1-9][0-9])?${optionalDecimals}|100)`;
 const anyNumberWithinThreeHundredSixty = `(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-9][0-9]|3[0-5][0-9])${optionalDecimals}|360)`;
 const anyPercentage = `(${anyNumber}%)`;
@@ -220,7 +224,7 @@ const anyPercentageWithinHundred = `(${anyNumberWithinHundred}(%)?)`;
 const hundredPercent = `(([0-9]|[1-9][0-9]|100)%)`;
 const alphaPercentage = `(((${hundredPercent}))|(0?${optionalDecimals})|1))?`;
 const alphaPercentageRequired = `(${hundredPercent}|(0?${optionalDecimals})|1)`;
-const endingWithAlphaPercentage = `\\s*?\\)?)(\\s*?(\\/?)\\s+${alphaPercentage}\\s*?\\)$`;
+const endingWithAlphaPercentage = `${spaceNoneOrMore}?\\)?)(${spaceNoneOrMore}?(\\/?)${spaceOneOrMore}${alphaPercentage}${spaceNoneOrMore}?\\)$`;
 const degRegex = `(-?${anyNumberWithinThreeHundredSixty}(deg)?)`;
 
 // * Validate HTML color 'hsl'
@@ -233,9 +237,9 @@ export const validateHTMLColorHsl = (color) => {
   if (isString(color)) {
     // Validate each possible unit value separately, as their values differ
     const gradRegex = `(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-9][0-9]|3[0-9][0-9]|400)grad)`;
-    const radRegex = `((([0-5])?\\.\\d+|6\\.([0-9]|1[0-9]|2[0-8])|[0-6])rad)`;
+    const radRegex = `((([0-5])?\\.${digitOneOrMore}|6\\.([0-9]|1[0-9]|2[0-8])|[0-6])rad)`;
     const turnRegex = `((0?${optionalDecimals}|1)turn)`;
-    const regexLogic = `(hsl)a?\\((\\s*?(${degRegex}|${gradRegex}|${radRegex}|${turnRegex})${optionalCommaOrRequiredSpace})(\\s*?(0|${hundredPercent})${optionalCommaOrRequiredSpace})(\\s*?(0|${hundredPercent})\\s*?\\)?)(\\s*?(\\/?|,?)\\s*?(((${hundredPercent}))|(0?${optionalDecimals})|1))?\\)$`;
+    const regexLogic = `(hsl)a?\\((${spaceNoneOrMore}?(${degRegex}|${gradRegex}|${radRegex}|${turnRegex})${optionalCommaOrRequiredSpace})(${spaceNoneOrMore}?(0|${hundredPercent})${optionalCommaOrRequiredSpace})(${spaceNoneOrMore}?(0|${hundredPercent})${spaceNoneOrMore}?\\)?)(${spaceNoneOrMore}?(\\/?|,?)${spaceNoneOrMore}?(((${hundredPercent}))|(0?${optionalDecimals})|1))?\\)$`;
     const regex = new RegExp(regexLogic);
     return color && regex.test(color);
   }
@@ -246,7 +250,7 @@ export const validateHTMLColorHsl = (color) => {
 // 'deg': degrees | full circle = 360
 export const validateHTMLColorHwb = (color) => {
   if (isString(color)) {
-    const regexLogic = `(hwb\\(\\s*?${degRegex}\\s+)((0|${hundredPercent})\\s+)((0|${hundredPercent})${endingWithAlphaPercentage}`;
+    const regexLogic = `(hwb\\(${spaceNoneOrMore}?${degRegex}${spaceOneOrMore})((0|${hundredPercent})${spaceOneOrMore})((0|${hundredPercent})${endingWithAlphaPercentage}`;
     const regex = new RegExp(regexLogic);
     return color && regex.test(color);
   }
@@ -257,7 +261,7 @@ export const validateHTMLColorHwb = (color) => {
 export const validateHTMLColorLab = (color) => {
   if (isString(color)) {
     const labParam = `(-?(([0-9]|[1-9][0-9]|1[0-5][0-9])${optionalDecimals}?|160))`;
-    const regexLogic = `(lab\\(\\s*?${anyPercentage}\\s+${labParam}\\s+${labParam}${endingWithAlphaPercentage}`;
+    const regexLogic = `(lab\\(${spaceNoneOrMore}?${anyPercentage}${spaceOneOrMore}${labParam}${spaceOneOrMore}${labParam}${endingWithAlphaPercentage}`;
     const regex = new RegExp(regexLogic);
     return color && regex.test(color);
   }
@@ -283,8 +287,8 @@ export const validateHTMLColorLch = (color) => {
     const L = `${anyPercentageWithinHundred}`;
     const C = `${anyNumber}`;
     const H = `((${degRegex})|(0|${alphaPercentageRequired})|${anyNumberWithinThreeHundredSixty})`;
-    const A = `(\\/\\s*?${alphaPercentageRequired})`;
-    const allProps = `(\\s*?${L}\\s+${C}\\s+${H}\\s*?(${A})?)`
+    const A = `(\\/${spaceNoneOrMore}?${alphaPercentageRequired})`;
+    const allProps = `(${spaceNoneOrMore}?${L}${spaceOneOrMore}${C}${spaceOneOrMore}${H}${spaceNoneOrMore}?(${A})?)`
     const regexLogic = `(lch\\(${allProps}\\))`
     debug && console.log('[validateHTMLColorLch] L', L);
     debug && console.log('[validateHTMLColorLch] C', C);
