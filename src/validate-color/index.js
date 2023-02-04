@@ -195,10 +195,10 @@ export const validateHTMLColorHex = (color) => {
   }
 };
 
-const spaceNoneOrMore = `(\\s{0,9})`;
-const spaceOneOrMore = `(\\s{1,9})`;
-const digitNoneOrMore = `(\\d{0,9})`;
-const digitOneOrMore = `(\\d{1,9})`;
+const spaceNoneOrMore = `([\\s]{0,5})`;
+const spaceOneOrMore = `([\\s]{1,5})`;
+const digitNoneOrMore = `([\\d]{0,5})`;
+const digitOneOrMore = `([\\d]{1,5})`;
 const optionalCommaOrRequiredSpace = `((${spaceNoneOrMore},${spaceNoneOrMore})|(${spaceOneOrMore}))`;
 const optionalDecimals = `((\\.${digitOneOrMore})?)`;
 const anyNumber = `(${digitNoneOrMore}${optionalDecimals})`;
@@ -222,13 +222,13 @@ const degRegex = `(-?${anyNumberWithinThreeHundredSixty}(deg)?)`;
 // Note that 'rgba()' is now merged into 'rgb()'
 export const validateHTMLColorRgb = (color) => {
   if (isString(color)) {
-    const letter = `${spaceNoneOrMore}${digitOneOrMore}%?${spaceNoneOrMore},?${spaceNoneOrMore}`
+    const letter = `${spaceNoneOrMore}${digitOneOrMore}%?${spaceNoneOrMore},?`
     const gap = `((${spaceNoneOrMore},?${spaceNoneOrMore})|(${spaceOneOrMore}))`
     const R = `${letter}${gap}`;
     const G = `${letter}${gap}`;
     const B = `${letter}${gap}`;
-    const A = `(${gap}\\/?${spaceNoneOrMore}(0?\\.?${digitOneOrMore}%?${spaceNoneOrMore})?|1|0)`;
-    const regexLogic = `(rgb)a?\\(${R}${G}${B}\\)?(${A})?\\)$`
+    const A = `(\\/?${spaceNoneOrMore}(0?\\.?${digitOneOrMore}%?${spaceNoneOrMore})?|1|0)`;
+    const regexLogic = `(rgb)a?\\(${R}${G}${B}(${A})?\\)$`
     const regex = new RegExp(regexLogic);
     return color && regex.test(color);
   }

@@ -102,6 +102,8 @@ const validateHTMLColorRgbInvalid = [
   "rgb(0,0,0,1.2)",
   "rgba(0, 0, 0,  1)foo",
   "rgba(0,0,0, 1.2)",
+  // Valid, in practice, but we're invalidating this as a way to avoid 'ReDoS' exploitation
+  "rgb(0,       0  , 0                          )",
 ];
 const validateHTMLColorRgbValidRgb = [
   "rgb(0, 255, 255)",
@@ -118,13 +120,14 @@ const validateHTMLColorRgbValidRgb = [
   "rgb(0% 100% 100% / 0.8)",
   "rgb(0% 100% 100% / .8)",
   "rgb(0% 100% 100% / 100%)",
+  "rgb(0,0,0)",
+  "rgb(0, 0, 0, .8888)",
   // former tests
   "rgb(0, 0, 0)",
   "rgb(  0, 0, 0 )",
   "rgb(100%, 100%, 100%)",
   "rgb(0,0,0, 0.4)",
   "rgb(0,0,0, 0.499)",
-  "rgb(0,       0  , 0                          )",
 ];
 const validateHTMLColorRgbValidRgba = [
   "rgba(0, 255, 255)",
@@ -141,6 +144,8 @@ const validateHTMLColorRgbValidRgba = [
   "rgba(0% 100% 100% / 0.8)",
   "rgba(0% 100% 100% / .8)",
   "rgba(0% 100% 100% / 100%)",
+  "rgb(0,0,0,0)",
+  "rgb(0, 0, 0, .8888)",
   // former tests
   "rgba(0, 0, 0,  1)",
   "rgba(0, 0, 0,  .45)",
@@ -174,6 +179,8 @@ const validateHTMLColorHslInvalid = [
   "hsl(6.29rad, 60%, 70%)",
   "hsl(7rad, 60%, 70%)",
   "hsl(1.1turn, 60%, 70%)",
+  // Valid, in practice, but we're invalidating this as a way to avoid 'ReDoS' exploitation
+  "hsl(0,       0  , 0                          )",
 ];
 const validateHTMLColorHslValidHsl = [
   "hsl(1, 60%, 70%)",
@@ -198,7 +205,6 @@ const validateHTMLColorHslValidHsl = [
   "hsl(  0, 0, 0 )",
   "hsl(0,0,0, 0.4)",
   "hsl(0,0,0, 0.499)",
-  "hsl(0,       0  , 0                          )",
   // lavender variations (same color)
   "hsl(270,60%,70%)",
   "hsl(270, 60%, 70%)",
@@ -258,6 +264,8 @@ const validateHTMLColorHwbInvalid = [
   'hwb(180 0%0% / 100%)',
   'hwb(180 0% 0%/100%)',
   'hwb( 180 deg     0%   0%   /       100%   )',
+  // Valid, in practice, but we're invalidating this as a way to avoid 'ReDoS' exploitation
+  'hwb( 180      0%   0%   /       100%   )',
 ];
 const validateHTMLColorHwbValid = [
   'hwb(180 60% 80%)',
@@ -268,7 +276,6 @@ const validateHTMLColorHwbValid = [
   'hwb(180 0% 0% / 0.1)',
   'hwb(180 0% 0% / 1%)',
   'hwb(180 0% 0% / 100%)',
-  'hwb( 180      0%   0%   /       100%   )',
   'hwb(180deg 0% 0%)',
   'hwb(180deg 0% 0% / 1)',
   'hwb(180deg 0% 0% / 100%)',
@@ -280,6 +287,9 @@ const validateHTMLColorLabInvalid = [
   'lab(67.5345% -10 -161 / 1)',
   'lab(67.5345% -10 -161 / 100%)',
   'lab(67.5345% -10 -160 / 101%)',
+  // Valid, in practice, but we're invalidating this as a way to avoid 'ReDoS' exploitation
+  'lab(67.5345% -8.6911 -159.131231)',
+  'lab(67.5345% -8.6911 -159.131231 / .987189732)',
 ];
 const validateHTMLColorLabValid = [
   'lab(67.5345% -8.6911 -41.6019)',
@@ -289,8 +299,8 @@ const validateHTMLColorLabValid = [
   'lab(67.5345% 0 0)',
   'lab(0.5345% 0 0)',
   'lab(0% 0 0)',
-  'lab(67.5345% -8.6911 -159.131231)',
-  'lab(67.5345% -8.6911 -159.131231 / .987189732)',
+  'lab(67.5345% -8.6911 -159.13123)',
+  'lab(67.5345% -8.6911 -159.13123 / .98718)',
   'lab(1337% 0 0)',
   'lab(2000% 0 0)',
   'lab(1337% -8.6911 -41.6019 / 100%)',
