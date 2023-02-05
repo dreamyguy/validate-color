@@ -1,6 +1,8 @@
 // Good article on HTML Colors:
 // https://dev.to/alvaromontoro/the-ultimate-guide-to-css-colors-2020-edition-1bh1#hsl
 
+const debugRegex = false
+
 // Check if parameter is defined and a string
 const isString = (color) => color && typeof color === "string";
 // All existing HTML color names
@@ -191,8 +193,10 @@ export const validateHTMLColorSpecialName = (color) => {
 export const validateHTMLColorHex = (color) => {
   if (isString(color)) {
     const regex = /^#([\da-f]{3}){1,2}$|^#([\da-f]{4}){1,2}$/i;
+    debugRegex && console.log('regex (hex)', regex);
     return color && regex.test(color);
   }
+  return false;
 };
 
 const spaceNoneOrMore = `([\\s]{0,5})`;
@@ -230,8 +234,10 @@ export const validateHTMLColorRgb = (color) => {
     const A = `(\\/?${spaceNoneOrMore}(0?\\.?${digitOneOrMore}%?${spaceNoneOrMore})?|1|0)`;
     const regexLogic = `(rgb)a?\\(${R}${G}${B}(${A})?\\)$`
     const regex = new RegExp(regexLogic);
+    debugRegex && console.log('regex (rgb)', regex);
     return color && regex.test(color);
   }
+  return false;
 };
 
 // * Validate HTML color 'hsl'
@@ -248,8 +254,10 @@ export const validateHTMLColorHsl = (color) => {
     const turnRegex = `((0?${optionalDecimals}|1)turn)`;
     const regexLogic = `(hsl)a?\\((${spaceNoneOrMore}?(${degRegex}|${gradRegex}|${radRegex}|${turnRegex})${optionalCommaOrRequiredSpace})(${spaceNoneOrMore}?(0|${hundredPercent})${optionalCommaOrRequiredSpace})(${spaceNoneOrMore}?(0|${hundredPercent})${spaceNoneOrMore}?\\)?)(${spaceNoneOrMore}?(\\/?|,?)${spaceNoneOrMore}?(((${hundredPercent}))|(0?${optionalDecimals})|1))?\\)$`;
     const regex = new RegExp(regexLogic);
+    debugRegex && console.log('regex (hsl)', regex);
     return color && regex.test(color);
   }
+  return false;
 };
 
 // * Validate HTML color 'hwb'
@@ -259,8 +267,10 @@ export const validateHTMLColorHwb = (color) => {
   if (isString(color)) {
     const regexLogic = `(hwb\\(${spaceNoneOrMore}?${degRegex}${spaceOneOrMore})((0|${hundredPercent})${spaceOneOrMore})((0|${hundredPercent})${endingWithAlphaPercentage}`;
     const regex = new RegExp(regexLogic);
+    debugRegex && console.log('regex (hwb)', regex);
     return color && regex.test(color);
   }
+  return false;
 };
 
 // * Validate HTML color 'lab'
@@ -270,8 +280,10 @@ export const validateHTMLColorLab = (color) => {
     const labParam = `(-?(([0-9]|[1-9][0-9]|1[0-5][0-9])${optionalDecimals}?|160))`;
     const regexLogic = `(lab\\(${spaceNoneOrMore}?${anyPercentage}${spaceOneOrMore}${labParam}${spaceOneOrMore}${labParam}${endingWithAlphaPercentage}`;
     const regex = new RegExp(regexLogic);
+    debugRegex && console.log('regex (lab)', regex);
     return color && regex.test(color);
   }
+  return false;
 };
 
 // * Validate HTML color 'lwc'
@@ -302,8 +314,10 @@ export const validateHTMLColorLch = (color) => {
     debug && console.log('[validateHTMLColorLch] H', H);
     debug && console.log('[validateHTMLColorLch] A', A);
     const regex = new RegExp(regexLogic);
+    debugRegex && console.log('regex (lch)', regex);
     return color && regex.test(color);
   }
+  return false;
 };
 
 // * Validate only HTML colors (`hex`, `rgb`, `rgba`, `hsl`, `hsla`, `hwb`, `lab`, `lch`), without `name` og `special name`**
