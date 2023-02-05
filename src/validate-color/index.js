@@ -213,7 +213,7 @@ const anyPercentageWithinHundred = `(${anyNumberWithinHundred}(%)?)`;
 const hundredPercent = `(([0-9]|[1-9][0-9]|100)%)`;
 const alphaPercentage = `(((${hundredPercent}))|(0?${optionalDecimals})|1))?`;
 const alphaPercentageRequired = `(${hundredPercent}|(0?${optionalDecimals})|1)`;
-const endingWithAlphaPercentage = `${spaceNoneOrMore}\\)?)(${spaceNoneOrMore}(\\/?)${spaceOneOrMore}${alphaPercentage}${spaceNoneOrMore}\\)$`;
+const endingWithAlphaPercentage = `${spaceNoneOrMore}\\)?)(${spaceNoneOrMore}(\\/?)${spaceOneOrMore}${alphaPercentage}${spaceNoneOrMore}\\)`;
 const degRegex = `(-?${anyNumberWithinThreeHundredSixty}(deg)?)`;
 
 // * Validate HTML color 'rgb'
@@ -232,7 +232,7 @@ export const validateHTMLColorRgb = (color) => {
     const G = `${letter}${gap}`;
     const B = `${letter}${gap}`;
     const A = `(\\/?${spaceNoneOrMore}(0?\\.?${digitOneOrMore}%?${spaceNoneOrMore})?|1|0)`;
-    const regexLogic = `(rgb)a?\\(${R}${G}${B}(${A})?\\)$`
+    const regexLogic = `^(rgb)a?\\(${R}${G}${B}(${A})?\\)$`
     const regex = new RegExp(regexLogic);
     debugRegex && console.log('regex (rgb)', regex);
     return color && regex.test(color);
@@ -252,7 +252,7 @@ export const validateHTMLColorHsl = (color) => {
     const gradRegex = `(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-9][0-9]|3[0-9][0-9]|400)grad)`;
     const radRegex = `((([0-5])?\\.${digitOneOrMore}|6\\.([0-9]|1[0-9]|2[0-8])|[0-6])rad)`;
     const turnRegex = `((0?${optionalDecimals}|1)turn)`;
-    const regexLogic = `(hsl)a?\\((${spaceNoneOrMore}(${degRegex}|${gradRegex}|${radRegex}|${turnRegex})${optionalCommaOrRequiredSpace})(${spaceNoneOrMore}(0|${hundredPercent})${optionalCommaOrRequiredSpace})(${spaceNoneOrMore}(0|${hundredPercent})${spaceNoneOrMore}\\)?)(${spaceNoneOrMore}(\\/?|,?)${spaceNoneOrMore}(((${hundredPercent}))|(0?${optionalDecimals})|1))?\\)$`;
+    const regexLogic = `^(hsl)a?\\((${spaceNoneOrMore}(${degRegex}|${gradRegex}|${radRegex}|${turnRegex})${optionalCommaOrRequiredSpace})(${spaceNoneOrMore}(0|${hundredPercent})${optionalCommaOrRequiredSpace})(${spaceNoneOrMore}(0|${hundredPercent})${spaceNoneOrMore}\\)?)(${spaceNoneOrMore}(\\/?|,?)${spaceNoneOrMore}(((${hundredPercent}))|(0?${optionalDecimals})|1))?\\)$`;
     const regex = new RegExp(regexLogic);
     debugRegex && console.log('regex (hsl)', regex);
     return color && regex.test(color);
@@ -265,7 +265,7 @@ export const validateHTMLColorHsl = (color) => {
 // 'deg': degrees | full circle = 360
 export const validateHTMLColorHwb = (color) => {
   if (isString(color)) {
-    const regexLogic = `(hwb\\(${spaceNoneOrMore}${degRegex}${spaceOneOrMore})((0|${hundredPercent})${spaceOneOrMore})((0|${hundredPercent})${endingWithAlphaPercentage}`;
+    const regexLogic = `^(hwb\\(${spaceNoneOrMore}${degRegex}${spaceOneOrMore})((0|${hundredPercent})${spaceOneOrMore})((0|${hundredPercent})${endingWithAlphaPercentage}$`;
     const regex = new RegExp(regexLogic);
     debugRegex && console.log('regex (hwb)', regex);
     return color && regex.test(color);
@@ -278,7 +278,7 @@ export const validateHTMLColorHwb = (color) => {
 export const validateHTMLColorLab = (color) => {
   if (isString(color)) {
     const labParam = `(-?(([0-9]|[1-9][0-9]|1[0-5][0-9])${optionalDecimals}?|160))`;
-    const regexLogic = `(lab\\(${spaceNoneOrMore}${anyPercentage}${spaceOneOrMore}${labParam}${spaceOneOrMore}${labParam}${endingWithAlphaPercentage}`;
+    const regexLogic = `^(lab\\(${spaceNoneOrMore}${anyPercentage}${spaceOneOrMore}${labParam}${spaceOneOrMore}${labParam}${endingWithAlphaPercentage}$`;
     const regex = new RegExp(regexLogic);
     debugRegex && console.log('regex (lab)', regex);
     return color && regex.test(color);
@@ -308,7 +308,7 @@ export const validateHTMLColorLch = (color) => {
     const H = `((${degRegex})|(0|${alphaPercentageRequired})|${anyNumberWithinThreeHundredSixty})`;
     const A = `(\\/${spaceNoneOrMore}${alphaPercentageRequired})`;
     const allProps = `(${spaceNoneOrMore}${L}${spaceOneOrMore}${C}${spaceOneOrMore}${H}${spaceNoneOrMore}(${A})?)`
-    const regexLogic = `(lch\\(${allProps}\\))`
+    const regexLogic = `^lch\\(${allProps}\\)$`
     debug && console.log('[validateHTMLColorLch] L', L);
     debug && console.log('[validateHTMLColorLch] C', C);
     debug && console.log('[validateHTMLColorLch] H', H);
