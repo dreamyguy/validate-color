@@ -151,7 +151,11 @@ A similar problem was reported for the [`color-string` package](https://security
 
 A good article by Godson Obielum: [How to protect against regex denial-of-service (ReDoS) attacks](https://blog.logrocket.com/protect-against-regex-denial-of-service-redos-attacks/).
 
-The issue is caused by the "greedy" character in `regex`, the infamous `+`. I've made amendments that limit the number of both spaces and digits by `9`, instead of having no limits.
+The issue is caused by the "greedy" character in `regex`, the infamous `+`. I've made amendments that limit the number of both spaces and digits by `5`, instead of having no limits.
+
+I've also made patterns stricter and removed redundant optionals, simplifying whenever possible.
+
+> 👉 All current `regex` have been tested with https://regex.rip/ and `npx redos-detector check "<regex pattern>" --maxSteps 10000)` (see [redos-detector](https://www.npmjs.com/package/redos-detector) for more options).
 
 **That will, from this point onwards, invalidate otherwise valid colors that cross that threshold.**
 
